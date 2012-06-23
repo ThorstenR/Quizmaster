@@ -1,0 +1,15 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 05.06.2012 13:55:12 by Hibernate Tools 3.2.1.GA -->
+<hibernate-mapping>
+    <class name="entity.Answer" table="answer" catalog="quizmaster">
+        <id name="id" type="java.lang.Integer">
+            <column name="id" />
+            <generator class="identity" />
+        </id>
+        <property name="answer" type="string">
+            <column name="answer" not-null="true" />
+        </property>
+    </class>
+</hibernate-mapping>
