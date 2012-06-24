@@ -14,6 +14,12 @@ import org.hibernate.HibernateException;
  * @author thorsten
  */
 public class DBUser {
+	/**
+	 * Retrieve a user from the database
+	 * 
+	 * @param username
+	 * @return User
+	 */
 	public static User getUserByUsername(String username) {
 		try {
 			return (User) MySQL.execute("from User where username = '" + username + "'");
@@ -24,7 +30,13 @@ public class DBUser {
 		}
 	}
 	
-	public static void addUser(String username, String password, String email) {
+	/**
+	 * Adding a new user to the database
+	 * 
+	 * @param username
+	 * @param password
+	 */
+	public static void addUser(String username, String password) {
 		try {
 			String salt = PasswordEncoder.generateHash();
 			String newPassword = PasswordEncoder.getInstance().encode(password, salt);

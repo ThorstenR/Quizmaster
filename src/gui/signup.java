@@ -90,7 +90,7 @@ public class signup extends javax.swing.JFrame {
 
 	private void btnSignupActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSignupActionPerformed
 		if(DBUser.getUserByUsername(txtUsername.getText()) == null) {
-			DBUser.addUser(txtUsername.getText(), txtPassword.getText(), "nop");
+			DBUser.addUser(txtUsername.getText(), txtPassword.getText());
 			
 			Tools.messageBoxInfo(null, "Successfully added the user " + txtUsername.getText());
 			this.dispose();

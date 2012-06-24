@@ -12,6 +12,12 @@ import org.hibernate.HibernateException;
  * @author thorsten
  */
 public class QuestionHelper {
+	/**
+	 * Returns the answers related to q
+	 * 
+	 * @param q
+	 * @return ArrayList<Answer>
+	 */
 	public static ArrayList<Answer> getAnswersForQuestion(Question q) {
 		try {
 			List<AnswerQuestion> answerquestions = (List<AnswerQuestion>) MySQL.execute("from AnswerQuestion where question_id = " + q.getId());
@@ -35,6 +41,12 @@ public class QuestionHelper {
 		}
 	}
 	
+	/**
+	 * Returns an answer related to id
+	 * 
+	 * @param id
+	 * @return Answer
+	 */
 	public static Answer getAnswerById(int id) {
 		try {
 			return (Answer) MySQL.execute("from Answer where id = " + id);
@@ -45,6 +57,11 @@ public class QuestionHelper {
 		}
 	}
 	
+	/**
+	 * Returns all questions
+	 * 
+	 * @return List<Question>
+	 */
 	public static List<Question> getAllQuestions() {
 		try {
 			return (List<Question>) MySQL.execute("from Question", 2);
@@ -55,6 +72,12 @@ public class QuestionHelper {
 		}
 	}
 	
+	/**
+	 * Returns the questions related to type
+	 * 
+	 * @param type
+	 * @return List<Question>
+	 */
 	public static List<Question> getQuestionsByType(Type type) {
 		try {
 			return (List<Question>) MySQL.execute("from Question where type = " + type);
@@ -65,6 +88,12 @@ public class QuestionHelper {
 		}		
 	}
 	
+	/**
+	 * Returns a question related to id
+	 * 
+	 * @param id
+	 * @return Question
+	 */
 	public static Question getQuestionById(int id) {
 		try {
 			return (Question) MySQL.execute("from Question where id = " + id);
@@ -75,6 +104,12 @@ public class QuestionHelper {
 		}
 	}
 	
+	/**
+	 * Returns a question related to the question text
+	 * 
+	 * @param question
+	 * @return Question
+	 */
 	public static Question getQuestionByQuestion(String question) {
 		try {
 			return (Question) MySQL.execute("from Question where question = '" + question + "'");
@@ -85,6 +120,10 @@ public class QuestionHelper {
 		}
 	}
 	
+	/**
+	 * Returns a random question
+	 * @return Question
+	 */
 	public static Question getRandomQuestion() {
 		try {
 			return (Question) MySQL.execute("from Question ORDER BY rand()");

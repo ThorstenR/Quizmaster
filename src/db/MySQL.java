@@ -10,10 +10,22 @@ import org.hibernate.Session;
 public class MySQL {
 	private static Session session = HibernateUtil.getSessionFactory().openSession();
 	
+	/**
+	 * Retrieve the current database session object
+	 * 
+	 * @return Session
+	 */
 	public static Session getSession() {
 		return session;
 	}
 	
+	/**
+	 * Executes a HQL-Statement
+	 * 
+	 * @param query
+	 * @param maxResults
+	 * @return Object
+	 */
 	public static synchronized Object execute(String query, int... maxResults) {
 		session.beginTransaction();
 		Query q = session.createQuery(query);

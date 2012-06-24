@@ -36,10 +36,18 @@ public class quiz extends javax.swing.JFrame {
 		initQuiz();
 	}
 	
+	/**
+	 * Sets the currently logged in user
+	 * 
+	 * @param currentUser
+	 */
 	public void setCurrentUser(User currentUser) {
 		this.currentUser = currentUser;
 	}
 	
+	/**
+	 * Initializes the quiz
+	 */
 	private void initQuiz() {
 		questions = QuestionHelper.getQuestionsByType(db.Type.Auswahl);
 		Collections.shuffle(questions);
@@ -54,6 +62,9 @@ public class quiz extends javax.swing.JFrame {
 		showQuestion();
 	}
 	
+	/**
+	 * Displays the next question
+	 */
 	private void showQuestion() {
 		Question q = questions.get(currentQuestion);
 		
@@ -70,6 +81,9 @@ public class quiz extends javax.swing.JFrame {
 		lblQuestionCount.setText(String.format("%s/%s", Integer.toString(currentQuestion + 1), Integer.toString(maxQuestions)));
 	}
 	
+	/**
+	 * Procedure to show the result form
+	 */
 	private void showResult() {
 		gui.result result = new gui.result();
 		result.setCurrentUser(currentUser);
@@ -81,6 +95,9 @@ public class quiz extends javax.swing.JFrame {
 		this.setVisible(false);
 	}
 	
+	/**
+	 * Verifies the current question and prepares to display the next question
+	 */
 	private void checkQuestion() {
 		JRadioButton rbSelected = null;
 		Question q = questions.get(currentQuestion);

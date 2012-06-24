@@ -1,11 +1,7 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package db;
 
-import org.hibernate.cfg.AnnotationConfiguration;
 import org.hibernate.SessionFactory;
+import org.hibernate.cfg.AnnotationConfiguration;
 
 /**
  * Hibernate Utility class with a convenient method to get Session Factory
@@ -29,6 +25,11 @@ public class HibernateUtil {
 		}
 	}
 	
+	/**
+	 * Retrieve the session object for the current Hibernate instance
+	 * 
+	 * @return SessionFactory
+	 */
 	public static SessionFactory getSessionFactory() {
 		return sessionFactory;
 	}

@@ -11,7 +11,7 @@ import javax.swing.JPanel;
 
 /**
  *
- * @author Leatherface
+ * @author thorsten
  */
 public class result extends javax.swing.JFrame {
 	private User currentUser = null;
@@ -26,18 +26,36 @@ public class result extends javax.swing.JFrame {
 		Tools.centerFrame(this);
 	}
 	
+	/**
+	 * Sets current user
+	 * 
+	 * @param currentUser
+	 */
 	public void setCurrentUser(User currentUser) {
 		this.currentUser = currentUser;
 	}
 	
+	/**
+	 * Populates the correct questions
+	 * 
+	 * @param correctQuestions
+	 */
 	public void setCorrectQuestions(List<Question> correctQuestions) {
 		this.correctQuestions = correctQuestions;
 	}
 	
+	/**
+	 * Populates the wrong questions
+	 * 
+	 * @param wrongQuestions
+	 */
 	public void setWrongQuestions(List<WrongQuestion> wrongQuestions) {
 		this.wrongQuestions = wrongQuestions;
 	}
 	
+	/**
+	 * Displays all the output text
+	 */
 	public void displayOutput() {
 		lblCongrats.setText(
 			String.format(
@@ -51,6 +69,9 @@ public class result extends javax.swing.JFrame {
 		showWrongQuestions();
 	}
 	
+	/**
+	 * Lists the wrong questions and related choices (wrong choice / correct choice)
+	 */
 	private void showWrongQuestions() {
 		JPanel panelButton = new JPanel(new GridLayout(2,3));
 		
