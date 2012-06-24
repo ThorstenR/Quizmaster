@@ -17,7 +17,9 @@ import javax.swing.JRadioButton;
 public class quiz extends javax.swing.JFrame {
 
 	List<Question> questions = null;
-	int correctQuestions = 0;
+	List<Question> correctQuestions = null;
+	List<Question> wrongQuestions = null;
+	
 	int maxQuestions = 3;
 	int currentQuestion = 0;
 	
@@ -36,7 +38,8 @@ public class quiz extends javax.swing.JFrame {
 		Collections.shuffle(questions);
 		questions = questions.subList(0, maxQuestions);
 		
-		correctQuestions = 0;
+		correctQuestions = null;
+		wrongQuestions = null;
 		currentQuestion = 0;
 		
 		btnNext.setText("Next");
@@ -54,13 +57,32 @@ public class quiz extends javax.swing.JFrame {
 			index++;
 		}
 		
-		for(Component c: jPanel1.getComponents()) {
-			((JRadioButton)c).setSelected(false);
-//			Tools.messageBoxInfo(null, "test");
-		}
+		buttonGroup1.clearSelection();
 		
 		lblQuestion.setText(q.getQuestion());
 		lblQuestionCount.setText(String.format("%s/%s", Integer.toString(currentQuestion + 1), Integer.toString(maxQuestions)));
+	}
+	
+	private void checkQuestion() {
+		JRadioButton rbSelected = null;
+		Question q = questions.get(currentQuestion);
+		Answer a = QuestionHelper.getAnswerById(q.getCorrectId());
+		
+		for(Component c: jPanel1.getComponents()) {
+			JRadioButton rb = ((JRadioButton)c);
+			
+			if(rb.isSelected())
+				rbSelected = rb;
+		}
+		
+		if(rbSelected == null) {
+			Tools.messageBoxError(null, "Select an answer first...");
+			currentQuestion--;
+		} else if(a.getAnswer().equals(rbSelected.getText())) {
+			System.out.println("Correct");
+		} else {
+			System.out.println("Wrong");
+		}
 	}
 
 	/**
@@ -84,7 +106,7 @@ public class quiz extends javax.swing.JFrame {
         rb4 = new javax.swing.JRadioButton();
         lblQuestionCount = new javax.swing.JLabel();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Quizmaster by Thorsten Redetzky");
 
         lblQuestionLabel.setText("Question:");
@@ -199,6 +221,8 @@ public class quiz extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
 	private void btnNextMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnNextMouseClicked
+		checkQuestion();
+		
 		currentQuestion++;
 		
 		if(currentQuestion == questions.size() - 1) {
@@ -206,6 +230,7 @@ public class quiz extends javax.swing.JFrame {
 			showQuestion();
 		} else if(currentQuestion >= questions.size()) {
 			Tools.messageBoxError(null, "MAX ALREADY...");
+			currentQuestion--;
 		} else {
 			showQuestion();
 		}

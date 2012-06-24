@@ -35,6 +35,16 @@ public class QuestionHelper {
 		}
 	}
 	
+	public static Answer getAnswerById(int id) {
+		try {
+			return (Answer) MySQL.execute("from Answer where id = " + id);
+		} catch (HibernateException he) {
+			he.printStackTrace();
+			
+			return null;
+		}
+	}
+	
 	public static List<Question> getAllQuestions() {
 		try {
 			return (List<Question>) MySQL.execute("from Question", 2);
