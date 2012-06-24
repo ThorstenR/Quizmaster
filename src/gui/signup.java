@@ -1,5 +1,6 @@
 package gui;
 
+import db.DBUser;
 import helper.Tools;
 
 /**
@@ -88,8 +89,8 @@ public class signup extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
 	private void btnSignupActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSignupActionPerformed
-		if(db.User.getUserByUsername(txtUsername.getText()) == null) {
-			db.User.addUser(txtUsername.getText(), txtPassword.getText(), "nop");
+		if(DBUser.getUserByUsername(txtUsername.getText()) == null) {
+			DBUser.addUser(txtUsername.getText(), txtPassword.getText(), "nop");
 			
 			Tools.messageBoxInfo(null, "Successfully added the user " + txtUsername.getText());
 			this.dispose();

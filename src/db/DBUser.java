@@ -1,5 +1,6 @@
 package db;
 
+import entity.User;
 import helper.PasswordEncoder;
 import java.io.IOException;
 import java.security.NoSuchAlgorithmException;
@@ -12,10 +13,10 @@ import org.hibernate.HibernateException;
  *
  * @author thorsten
  */
-public class User {
-	public static entity.User getUserByUsername(String username) {
+public class DBUser {
+	public static User getUserByUsername(String username) {
 		try {
-			return (entity.User) MySQL.execute("from User where username = '" + username + "'");
+			return (User) MySQL.execute("from User where username = '" + username + "'");
 		} catch (HibernateException he) {
 			he.printStackTrace();
 			
@@ -28,7 +29,7 @@ public class User {
 			String salt = PasswordEncoder.generateHash();
 			String newPassword = PasswordEncoder.getInstance().encode(password, salt);
 
-			entity.User u = new entity.User();
+			User u = new entity.User();
 			u.setUsername(username);
 			u.setSalt(salt);
 			u.setPassword(newPassword);

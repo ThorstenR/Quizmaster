@@ -1,5 +1,6 @@
 package gui;
 
+import db.DBUser;
 import entity.User;
 import helper.PasswordEncoder;
 import helper.Tools;
@@ -13,7 +14,6 @@ import java.util.logging.Logger;
  * @author thorsten
  */
 public class main extends javax.swing.JFrame {
-
 	/**
 	 * Creates new form main
 	 */
@@ -138,7 +138,7 @@ public class main extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
 	private void btnLoginMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnLoginMouseClicked
-		User u = db.User.getUserByUsername(txtUsername.getText());
+		User u = DBUser.getUserByUsername(txtUsername.getText());
 		
 		if(u != null) {
 			try {
@@ -148,7 +148,8 @@ public class main extends javax.swing.JFrame {
 						admin.setVisible(true);
 					} else {
 						quiz quiz = new quiz();
-						quiz.setVisible(true);	
+						quiz.setCurrentUser(u);
+						quiz.setVisible(true);
 					}
 					
 					this.setVisible(false);

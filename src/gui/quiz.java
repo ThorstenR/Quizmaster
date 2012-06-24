@@ -1,11 +1,13 @@
 package gui;
 
 import db.QuestionHelper;
-import db.Type;
 import entity.Answer;
 import entity.Question;
+import entity.User;
 import helper.Tools;
+import helper.WrongQuestion;
 import java.awt.Component;
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import javax.swing.JRadioButton;
@@ -14,14 +16,15 @@ import javax.swing.JRadioButton;
  *
  * @author thorsten
  */
-public class quiz extends javax.swing.JFrame {
-
-	List<Question> questions = null;
-	List<Question> correctQuestions = null;
-	List<Question> wrongQuestions = null;
+public class quiz extends javax.swing.JFrame {	
+	private User currentUser = null;
 	
-	int maxQuestions = 3;
-	int currentQuestion = 0;
+	private List<Question> questions = null;
+	private List<Question> correctQuestions = null;
+	private List<WrongQuestion> wrongQuestions = null;
+	
+	private int maxQuestions = 3;
+	private int currentQuestion = 0;
 	
 	/**
 	 * Creates new form quiz
@@ -33,13 +36,17 @@ public class quiz extends javax.swing.JFrame {
 		initQuiz();
 	}
 	
+	public void setCurrentUser(User currentUser) {
+		this.currentUser = currentUser;
+	}
+	
 	private void initQuiz() {
 		questions = QuestionHelper.getQuestionsByType(db.Type.Auswahl);
 		Collections.shuffle(questions);
 		questions = questions.subList(0, maxQuestions);
 		
-		correctQuestions = null;
-		wrongQuestions = null;
+		correctQuestions = new ArrayList<Question>();
+		wrongQuestions = new ArrayList<WrongQuestion>();
 		currentQuestion = 0;
 		
 		btnNext.setText("Next");
@@ -63,6 +70,17 @@ public class quiz extends javax.swing.JFrame {
 		lblQuestionCount.setText(String.format("%s/%s", Integer.toString(currentQuestion + 1), Integer.toString(maxQuestions)));
 	}
 	
+	private void showResult() {
+		gui.result result = new gui.result();
+		result.setCurrentUser(currentUser);
+		result.setCorrectQuestions(correctQuestions);
+		result.setWrongQuestions(wrongQuestions);
+		result.displayOutput();
+		result.setVisible(true);
+
+		this.setVisible(false);
+	}
+	
 	private void checkQuestion() {
 		JRadioButton rbSelected = null;
 		Question q = questions.get(currentQuestion);
@@ -79,8 +97,13 @@ public class quiz extends javax.swing.JFrame {
 			Tools.messageBoxError(null, "Select an answer first...");
 			currentQuestion--;
 		} else if(a.getAnswer().equals(rbSelected.getText())) {
+			correctQuestions.add(q);
 			System.out.println("Correct");
 		} else {
+			WrongQuestion wq = new WrongQuestion(a.getAnswer(), rbSelected.getText(), q.getQuestion());
+			
+			wrongQuestions.add(wq);
+			
 			System.out.println("Wrong");
 		}
 	}
@@ -229,8 +252,9 @@ public class quiz extends javax.swing.JFrame {
 			btnNext.setText("Finish");
 			showQuestion();
 		} else if(currentQuestion >= questions.size()) {
-			Tools.messageBoxError(null, "MAX ALREADY...");
 			currentQuestion--;
+			
+			showResult();
 		} else {
 			showQuestion();
 		}
