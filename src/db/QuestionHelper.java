@@ -74,6 +74,36 @@ public class QuestionHelper {
 	}
 	
 	/**
+	 * Returns all relational entries
+	 * 
+	 * @return List<AnswerQuestion>
+	 */
+	public static List<AnswerQuestion> getAllAnswerQuestions() {
+		try {
+			return (List<AnswerQuestion>) MySQL.execute("from AnswerQuestion");
+		} catch (HibernateException he) {
+			he.printStackTrace();
+			
+			return null;
+		}
+	}
+	
+	/**
+	 * Returns all answers
+	 * 
+	 * @return List<Answer>
+	 */
+	public static List<Answer> getAllAnswers() {
+		try {
+			return (List<Answer>) MySQL.execute("from Answer");
+		} catch (HibernateException he) {
+			he.printStackTrace();
+			
+			return null;
+		}
+	}
+	
+	/**
 	 * Returns the questions for the given type
 	 * 
 	 * @param type

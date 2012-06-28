@@ -39,4 +39,9 @@ public class MySQL {
 			return null;
 		}
 	}
+	
+	public static synchronized void delete(Object o) {
+		session.delete(o);
+		session.flush();
+	}
 }

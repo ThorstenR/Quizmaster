@@ -1,6 +1,5 @@
 package helper;
 
-import entity.Question;
 import java.awt.Frame;
 import java.awt.GraphicsEnvironment;
 import java.awt.Point;
@@ -9,7 +8,6 @@ import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
-import java.util.List;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 
@@ -41,15 +39,14 @@ public class Tools {
 	
 	/**
 	 * Serializes a question
-	 * (Unused for now)
 	 * 
-	 * @param questions
+	 * @param o
 	 * @param filename
 	 */
-	public void serialize(List<Question> questions, String filename) {
+	public static void serialize(Object o, String filename) {
 		try {
 			ObjectOutputStream ous = new ObjectOutputStream(new FileOutputStream(filename));
-			ous.writeObject(questions);
+			ous.writeObject(o);
 			ous.close();
 		} catch (Exception ex) {
 			System.err.println(ex);
@@ -58,7 +55,6 @@ public class Tools {
 	
 	/**
 	 * Deserializes a file
-	 * (Unused for now)
 	 * 
 	 * @param filename
 	 * @return Object
@@ -66,7 +62,7 @@ public class Tools {
 	public static Object deserialize(String filename) {
 		try {
 			ObjectInputStream o = new ObjectInputStream(new FileInputStream(filename));
-			return o;
+			return o.readObject();
 		} catch (Exception ex) {
 			System.err.println(ex);
 			return null;
