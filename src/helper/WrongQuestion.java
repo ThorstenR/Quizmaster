@@ -1,7 +1,9 @@
 package helper;
 
 /**
- *
+ * Class to hold the minimal required information
+ * used for the result page
+ * 
  * @author thorsten
  */
 public class WrongQuestion {

@@ -13,11 +13,11 @@ import java.util.logging.Logger;
  *
  * @author thorsten
  */
-public class main extends javax.swing.JFrame {
+public class Login extends javax.swing.JFrame {
 	/**
-	 * Creates new form main
+	 * Creates new form Login
 	 */
-	public main() {
+	public Login() {
 		initComponents();
 		Tools.centerFrame(this);
 	}
@@ -144,10 +144,10 @@ public class main extends javax.swing.JFrame {
 			try {
 				if(PasswordEncoder.getInstance().encode(txtPassword.getText(), u.getSalt()).equals(u.getPassword())) {
 					if(txtUsername.getText().equals("admin")) {
-						admin admin = new admin();
+						Admin admin = new Admin();
 						admin.setVisible(true);
 					} else {
-						quiz quiz = new quiz();
+						Quiz quiz = new Quiz();
 						quiz.setCurrentUser(u);
 						quiz.setVisible(true);
 					}
@@ -157,9 +157,9 @@ public class main extends javax.swing.JFrame {
 					Tools.messageBoxError(null, "Wrong password!");
 				}
 			} catch (NoSuchAlgorithmException ex) {
-				Logger.getLogger(main.class.getName()).log(Level.SEVERE, null, ex);
+				Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
 			} catch (IOException ex) {
-				Logger.getLogger(main.class.getName()).log(Level.SEVERE, null, ex);
+				Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
 			}
 		} else {
 			Tools.messageBoxError(null, "Username does not exist!");
@@ -167,7 +167,7 @@ public class main extends javax.swing.JFrame {
 	}//GEN-LAST:event_btnLoginMouseClicked
 
 	private void btnSignupMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnSignupMouseClicked
-		signup signup = new signup();
+		Signup signup = new Signup();
 		signup.setVisible(true);
 	}//GEN-LAST:event_btnSignupMouseClicked
 
@@ -200,13 +200,13 @@ public class main extends javax.swing.JFrame {
 				}
 			}
 		} catch (ClassNotFoundException ex) {
-			java.util.logging.Logger.getLogger(main.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+			java.util.logging.Logger.getLogger(Login.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
 		} catch (InstantiationException ex) {
-			java.util.logging.Logger.getLogger(main.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+			java.util.logging.Logger.getLogger(Login.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
 		} catch (IllegalAccessException ex) {
-			java.util.logging.Logger.getLogger(main.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+			java.util.logging.Logger.getLogger(Login.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
 		} catch (javax.swing.UnsupportedLookAndFeelException ex) {
-			java.util.logging.Logger.getLogger(main.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+			java.util.logging.Logger.getLogger(Login.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
 		}
 		//</editor-fold>
 
@@ -216,7 +216,7 @@ public class main extends javax.swing.JFrame {
 		java.awt.EventQueue.invokeLater(new Runnable() {
 
 			public void run() {
-				new main().setVisible(true);
+				new Login().setVisible(true);
 			}
 		});
 	}

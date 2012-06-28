@@ -15,15 +15,16 @@ import sun.misc.BASE64Decoder;
 import sun.misc.BASE64Encoder;
 
 /**
+ * Helper class to create secure passwords
+ * 
  * @author Ashish Shukla
- *
  */
 public class PasswordEncoder {
     private static PasswordEncoder instance;
 
     /**
      * Count for the number of time to hash,
-     * more you hash more difficult it would be for the attacker
+     * the more you hash the more difficult it would be for the attacker
      */
     private final static int ITERATION_COUNT = 5;
 
@@ -47,6 +48,8 @@ public class PasswordEncoder {
     }
 	
 	/**
+	 * Generates a hash (usually) used as the salt
+	 * 
 	 * @return String
 	 * @author Thorsten Redetzky
 	 */
@@ -56,7 +59,8 @@ public class PasswordEncoder {
 	}
 
     /**
-     *
+     * Encodes the password with a salt using SHA-256
+	 * 
      * @param password
      * @param saltKey
      * @return String
@@ -84,6 +88,8 @@ public class PasswordEncoder {
     }
 
     /**
+	 * Converts a BASE64-string to a byte-array
+	 * 
      * @param str
      * @return byte[]
      * @throws IOException
@@ -96,6 +102,8 @@ public class PasswordEncoder {
     }
 
     /**
+	 * Converts a byte-array to a BASE64-string
+	 * 
      * @param bt
      * @return String
      * @throws IOException
@@ -106,5 +114,4 @@ public class PasswordEncoder {
 		
 		return returnString;
     }
-
 }

@@ -8,12 +8,13 @@ import java.util.List;
 import org.hibernate.HibernateException;
 
 /**
- *
+ * Helper class to easily retrieve question and answer lists / objects
+ * 
  * @author thorsten
  */
 public class QuestionHelper {
 	/**
-	 * Returns the answers related to q
+	 * Returns the answers for the given question
 	 * 
 	 * @param q
 	 * @return ArrayList<Answer>
@@ -42,7 +43,7 @@ public class QuestionHelper {
 	}
 	
 	/**
-	 * Returns an answer related to id
+	 * Returns the answer for the given id
 	 * 
 	 * @param id
 	 * @return Answer
@@ -73,7 +74,7 @@ public class QuestionHelper {
 	}
 	
 	/**
-	 * Returns the questions related to type
+	 * Returns the questions for the given type
 	 * 
 	 * @param type
 	 * @return List<Question>
@@ -89,7 +90,7 @@ public class QuestionHelper {
 	}
 	
 	/**
-	 * Returns a question related to id
+	 * Returns the question for the given id
 	 * 
 	 * @param id
 	 * @return Question
@@ -105,7 +106,7 @@ public class QuestionHelper {
 	}
 	
 	/**
-	 * Returns a question related to the question text
+	 * Returns the question for the given text
 	 * 
 	 * @param question
 	 * @return Question
@@ -122,6 +123,7 @@ public class QuestionHelper {
 	
 	/**
 	 * Returns a random question
+	 * 
 	 * @return Question
 	 */
 	public static Question getRandomQuestion() {

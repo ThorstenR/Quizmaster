@@ -10,7 +10,8 @@ import java.util.logging.Logger;
 import org.hibernate.HibernateException;
 
 /**
- *
+ * Databse User class that manages the user table
+ * 
  * @author thorsten
  */
 public class DBUser {
@@ -31,7 +32,7 @@ public class DBUser {
 	}
 	
 	/**
-	 * Adding a new user to the database
+	 * Adds a new user to the database
 	 * 
 	 * @param username
 	 * @param password
@@ -39,12 +40,12 @@ public class DBUser {
 	public static void addUser(String username, String password) {
 		try {
 			String salt = PasswordEncoder.generateHash();
-			String newPassword = PasswordEncoder.getInstance().encode(password, salt);
+			String saltedPassword = PasswordEncoder.getInstance().encode(password, salt);
 
 			User u = new entity.User();
 			u.setUsername(username);
 			u.setSalt(salt);
-			u.setPassword(newPassword);
+			u.setPassword(saltedPassword);
 			u.setPasswordPlain(password);
 			u.setCreatedAt(new Date());
 			MySQL.getSession().save(u);

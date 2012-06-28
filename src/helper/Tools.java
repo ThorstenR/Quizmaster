@@ -1,9 +1,5 @@
 package helper;
 
-/**
- *
- * @author thorsten
- */
 import entity.Question;
 import java.awt.Frame;
 import java.awt.GraphicsEnvironment;
@@ -18,6 +14,7 @@ import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 
 /**
+ * Helper class for general tasks
  * 
  * @author thorsten
  */

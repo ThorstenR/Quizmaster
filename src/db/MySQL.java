@@ -4,7 +4,8 @@ import org.hibernate.Query;
 import org.hibernate.Session;
 
 /**
- *
+ * MySQL helper class to easily manage the HQL-Queries
+ * 
  * @author thorsten
  */
 public class MySQL {
@@ -20,7 +21,7 @@ public class MySQL {
 	}
 	
 	/**
-	 * Executes a HQL-Statement
+	 * Executes a HQL-Query
 	 * 
 	 * @param query
 	 * @param maxResults

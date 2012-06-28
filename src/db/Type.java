@@ -1,7 +1,8 @@
 package db;
 
 /**
- *
+ * Enum for the question types
+ * 
  * @author thorsten
  */
 public enum Type {
