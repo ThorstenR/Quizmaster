@@ -36,6 +36,7 @@ public class Admin extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Quizmaster by Thorsten Redetzky");
+        setResizable(false);
 
         jButton1.setText("Export questions");
         jButton1.addActionListener(new java.awt.event.ActionListener() {

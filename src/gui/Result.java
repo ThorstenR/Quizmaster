@@ -102,6 +102,7 @@ public class Result extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Quizmaster by Thorsten Redetzky");
+        setResizable(false);
 
         lblCongrats.setText("Hallo %s, Sie haben %i von %i Fragen richtig beantwortet. Herzlichen Glückwunsch!");
 
