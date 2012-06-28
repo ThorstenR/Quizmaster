@@ -24,6 +24,8 @@ public class QuestionHelper {
 			
 			String condition = "";
 			for(AnswerQuestion aq: answerquestions) {
+				// -> fix aq.getId() -> aq.getAnswerId()
+				// -> fix mysql db
 				condition += aq.getId() + ",";
 			}
 			condition = condition.replaceAll("[,]+$", "");
@@ -64,7 +66,7 @@ public class QuestionHelper {
 	 */
 	public static List<Question> getAllQuestions() {
 		try {
-			return (List<Question>) MySQL.execute("from Question", 2);
+			return (List<Question>) MySQL.execute("from Question");
 		} catch (HibernateException he) {
 			he.printStackTrace();
 			

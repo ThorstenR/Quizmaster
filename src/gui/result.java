@@ -59,10 +59,11 @@ public class result extends javax.swing.JFrame {
 	public void displayOutput() {
 		lblCongrats.setText(
 			String.format(
-				"Hallo %s, Sie haben %d von %d Fragen richtig beantwortet. Herzlichen Glückwunsch!",
+				"Hallo %s, Sie haben %d von %d (%d %%) Fragen richtig beantwortet. Herzlichen Glückwunsch!",
 				currentUser.getUsername(),
 				correctQuestions.size(),
-				correctQuestions.size() + wrongQuestions.size()
+				correctQuestions.size() + wrongQuestions.size(),
+				(100 * correctQuestions.size()) / correctQuestions.size() + wrongQuestions.size()
 			)
 		);
 		

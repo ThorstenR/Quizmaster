@@ -49,7 +49,8 @@ public class quiz extends javax.swing.JFrame {
 	 * Initializes the quiz
 	 */
 	private void initQuiz() {
-		questions = QuestionHelper.getQuestionsByType(db.Type.Auswahl);
+//		questions = QuestionHelper.getQuestionsByType(db.Type.Auswahl);
+		questions = QuestionHelper.getAllQuestions();
 		Collections.shuffle(questions);
 		questions = questions.subList(0, maxQuestions);
 		
@@ -68,14 +69,24 @@ public class quiz extends javax.swing.JFrame {
 	private void showQuestion() {
 		Question q = questions.get(currentQuestion);
 		
-		int index = 0;
-		for(Answer a: QuestionHelper.getAnswersForQuestion(q)) {
-			((JRadioButton)jPanel1.getComponent(index)).setText(a.getAnswer());
+		if(q.getType() == 3) {
+			jPanel1.setVisible(true);
+			txtAnswer.setVisible(false);
 			
-			index++;
+			int index = 0;
+			for(Answer a: QuestionHelper.getAnswersForQuestion(q)) {
+				((JRadioButton)jPanel1.getComponent(index)).setText(a.getAnswer());
+
+				index++;
+			}
+			
+			buttonGroup1.clearSelection();
+		} else if(q.getType() == 1) {
+			jPanel1.setVisible(false);
+			txtAnswer.setVisible(true);
+			
+			txtAnswer.setText("");
 		}
-		
-		buttonGroup1.clearSelection();
 		
 		lblQuestion.setText(q.getQuestion());
 		lblQuestionCount.setText(String.format("%s/%s", Integer.toString(currentQuestion + 1), Integer.toString(maxQuestions)));
@@ -99,29 +110,37 @@ public class quiz extends javax.swing.JFrame {
 	 * Verifies the current question and prepares to display the next question
 	 */
 	private void checkQuestion() {
-		JRadioButton rbSelected = null;
 		Question q = questions.get(currentQuestion);
 		Answer a = QuestionHelper.getAnswerById(q.getCorrectId());
 		
-		for(Component c: jPanel1.getComponents()) {
-			JRadioButton rb = ((JRadioButton)c);
-			
-			if(rb.isSelected())
-				rbSelected = rb;
+		String answerText = "";
+		
+		if(q.getType() == 3) {
+			for(Component c: jPanel1.getComponents()) {
+				JRadioButton rb = ((JRadioButton)c);
+
+				if(rb.isSelected())
+					answerText = rb.getText();
+			}
+		} else if(q.getType() == 1) {
+			answerText = txtAnswer.getText();
 		}
 		
-		if(rbSelected == null) {
+		
+		if(answerText.equals("")) {
 			Tools.messageBoxError(null, "Select an answer first...");
 			currentQuestion--;
-		} else if(a.getAnswer().equals(rbSelected.getText())) {
+		} else if(a.getAnswer().equals(answerText)) {
 			correctQuestions.add(q);
 			System.out.println("Correct");
+			Tools.messageBoxInfo(null, "Correct!");
 		} else {
-			WrongQuestion wq = new WrongQuestion(a.getAnswer(), rbSelected.getText(), q.getQuestion());
+			WrongQuestion wq = new WrongQuestion(a.getAnswer(), answerText, q.getQuestion());
 			
 			wrongQuestions.add(wq);
 			
 			System.out.println("Wrong");
+			Tools.messageBoxInfo(null, "Wrong...");
 		}
 	}
 
@@ -139,6 +158,7 @@ public class quiz extends javax.swing.JFrame {
         lblQuestion = new javax.swing.JLabel();
         btnNext = new javax.swing.JButton();
         btnInit = new javax.swing.JButton();
+        txtAnswer = new javax.swing.JTextField();
         jPanel1 = new javax.swing.JPanel();
         jRadioButton1 = new javax.swing.JRadioButton();
         jRadioButton2 = new javax.swing.JRadioButton();
@@ -166,6 +186,8 @@ public class quiz extends javax.swing.JFrame {
                 btnInitMouseClicked(evt);
             }
         });
+
+        txtAnswer.setText("---");
 
         buttonGroup1.add(jRadioButton1);
         jRadioButton1.setText("---");
@@ -199,11 +221,10 @@ public class quiz extends javax.swing.JFrame {
             jPanel1Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
             .add(jPanel1Layout.createSequentialGroup()
                 .add(jPanel1Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.TRAILING)
-                    .add(jPanel1Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-                        .add(jPanel1Layout.createSequentialGroup()
-                            .add(66, 66, 66)
-                            .add(rb4))
-                        .add(jRadioButton2))
+                    .add(jPanel1Layout.createSequentialGroup()
+                        .add(jRadioButton2)
+                        .add(43, 43, 43)
+                        .add(rb4))
                     .add(jPanel1Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
                         .add(jPanel1Layout.createSequentialGroup()
                             .add(111, 111, 111)
@@ -236,6 +257,8 @@ public class quiz extends javax.swing.JFrame {
                 .add(8, 8, 8)
                 .add(btnInit)
                 .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .add(txtAnswer, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 161, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+                .add(18, 18, 18)
                 .add(btnNext)
                 .add(177, 177, 177))
         );
@@ -253,7 +276,8 @@ public class quiz extends javax.swing.JFrame {
                 .add(17, 17, 17)
                 .add(layout.createParallelGroup(org.jdesktop.layout.GroupLayout.BASELINE)
                     .add(btnInit)
-                    .add(btnNext))
+                    .add(btnNext)
+                    .add(txtAnswer, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
                 .add(8, 8, 8))
         );
 
@@ -334,5 +358,6 @@ public class quiz extends javax.swing.JFrame {
     private javax.swing.JLabel lblQuestionCount;
     private javax.swing.JLabel lblQuestionLabel;
     private javax.swing.JRadioButton rb4;
+    private javax.swing.JTextField txtAnswer;
     // End of variables declaration//GEN-END:variables
 }

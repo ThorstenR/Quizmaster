@@ -5,7 +5,7 @@ import helper.Tools;
 
 /**
  *
- * @author Leatherface
+ * @author thorsten
  */
 public class signup extends javax.swing.JFrame {
 
