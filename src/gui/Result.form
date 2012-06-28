@@ -24,10 +24,13 @@
   <Layout>
     <DimensionLayout dim="0">
       <Group type="103" groupAlignment="0" attributes="0">
-          <Group type="102" alignment="0" attributes="0">
+          <Group type="102" attributes="0">
               <EmptySpace max="-2" attributes="0"/>
-              <Component id="lblCongrats" min="-2" max="-2" attributes="0"/>
-              <EmptySpace pref="300" max="32767" attributes="0"/>
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <Component id="lblCongrats" min="-2" max="-2" attributes="0"/>
+                  <Component id="lblOutput" alignment="0" min="-2" max="-2" attributes="0"/>
+              </Group>
+              <EmptySpace pref="395" max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -36,15 +39,23 @@
           <Group type="102" alignment="0" attributes="0">
               <EmptySpace max="-2" attributes="0"/>
               <Component id="lblCongrats" min="-2" max="-2" attributes="0"/>
-              <EmptySpace pref="386" max="32767" attributes="0"/>
+              <EmptySpace min="-2" pref="39" max="-2" attributes="0"/>
+              <Component id="lblOutput" min="-2" max="-2" attributes="0"/>
+              <EmptySpace pref="338" max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
   </Layout>
   <SubComponents>
-    <Component class="java.awt.Label" name="lblCongrats">
+    <Component class="javax.swing.JLabel" name="lblCongrats">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Hallo %s, Sie haben %i von %i Fragen richtig beantwortet. Herzlichen Gl&#xfc;ckwunsch!"/>
+        <Property name="text" type="java.lang.String" value="Hello %s, you&apos;ve got %d out of %d (%d %%) questions correct. Congrats!"/>
+        <Property name="toolTipText" type="java.lang.String" value=""/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JLabel" name="lblOutput">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="---"/>
       </Properties>
     </Component>
   </SubComponents>

@@ -74,19 +74,20 @@ public class Result extends javax.swing.JFrame {
 	 * Lists the wrong questions and related choices (wrong choice / correct choice)
 	 */
 	private void showWrongQuestions() {
-		JPanel panelButton = new JPanel(new GridLayout(2,3));
+		String output = "<html>";
 		
 		for(WrongQuestion wq: wrongQuestions) {
-			JLabel q = new JLabel(wq.getQuestion());
-			JLabel wa = new JLabel(wq.getWrongAnswer());
-			JLabel ca = new JLabel(wq.getCorrectAnswer());
-			
-			panelButton.add(q);
-			panelButton.add(wa);
-			panelButton.add(ca);
+			output += String.format(""
+					+ "<p>%s</p>"
+					+ "Your answer: <span style=\"color: red;\">%s</span> - Correct answer: <span style=\"color: green;\">%s</span>"
+					+ "<br /><br />",
+					wq.getQuestion(), wq.getWrongAnswer(), wq.getCorrectAnswer()
+			);
 		}
 		
-		this.add(panelButton);
+		output += "</html>";
+		
+		lblOutput.setText(output);
 	}
 
 	/**
@@ -98,13 +99,17 @@ public class Result extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        lblCongrats = new java.awt.Label();
+        lblCongrats = new javax.swing.JLabel();
+        lblOutput = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Quizmaster by Thorsten Redetzky");
         setResizable(false);
 
-        lblCongrats.setText("Hallo %s, Sie haben %i von %i Fragen richtig beantwortet. Herzlichen Glückwunsch!");
+        lblCongrats.setText("Hello %s, you've got %d out of %d (%d %%) questions correct. Congrats!");
+        lblCongrats.setToolTipText("");
+
+        lblOutput.setText("---");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -112,15 +117,19 @@ public class Result extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(lblCongrats, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(300, Short.MAX_VALUE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(lblCongrats)
+                    .addComponent(lblOutput))
+                .addContainerGap(395, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(lblCongrats, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(386, Short.MAX_VALUE))
+                .addComponent(lblCongrats)
+                .addGap(39, 39, 39)
+                .addComponent(lblOutput)
+                .addContainerGap(338, Short.MAX_VALUE))
         );
 
         pack();
@@ -168,6 +177,7 @@ public class Result extends javax.swing.JFrame {
 		});
 	}
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private java.awt.Label lblCongrats;
+    private javax.swing.JLabel lblCongrats;
+    private javax.swing.JLabel lblOutput;
     // End of variables declaration//GEN-END:variables
 }

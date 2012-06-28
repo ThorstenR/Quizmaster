@@ -44,4 +44,10 @@ public class MySQL {
 		session.delete(o);
 		session.flush();
 	}
+	
+	public static synchronized void updateAutoIncrement(String table) {
+		Query query = session.createSQLQuery("ALTER TABLE " + table + " AUTO_INCREMENT = 1");
+		query.executeUpdate();
+//		query.list();
+	}
 }

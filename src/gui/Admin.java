@@ -94,16 +94,23 @@ public class Admin extends javax.swing.JFrame {
 	}//GEN-LAST:event_jButton1ActionPerformed
 
 	private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-		for(Question q: QuestionHelper.getAllQuestions()) {
-			MySQL.delete(q);
-		}
-		for(Answer a: QuestionHelper.getAllAnswers()) {
-			MySQL.delete(a);
-		}
-		for(AnswerQuestion aq: QuestionHelper.getAllAnswerQuestions()) {
-			MySQL.delete(aq);
+		try {
+			for(Question q: QuestionHelper.getAllQuestions()) {
+				MySQL.delete(q);
+			}
+			for(Answer a: QuestionHelper.getAllAnswers()) {
+				MySQL.delete(a);
+			}
+			for(AnswerQuestion aq: QuestionHelper.getAllAnswerQuestions()) {
+				MySQL.delete(aq);
+			}
+		} catch (Exception ex) {
+			
 		}
 		
+		MySQL.updateAutoIncrement("question");
+		MySQL.updateAutoIncrement("answer");
+		MySQL.updateAutoIncrement("answer_question");
 		
 		ArrayList<Question> questions = (ArrayList<Question>) Tools.deserialize("C:\\_dump\\questions.txt");
 		for(Question q: questions) {
