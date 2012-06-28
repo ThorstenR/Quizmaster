@@ -33,7 +33,7 @@ public class PasswordEncoder {
     private PasswordEncoder() {}
 
     /**
-     * @return
+     * @return PasswordEncoder
      * @author Ashish Shukla
      */
     public static synchronized PasswordEncoder getInstance() {
@@ -47,7 +47,7 @@ public class PasswordEncoder {
     }
 	
 	/**
-	 * @return
+	 * @return String
 	 * @author Thorsten Redetzky
 	 */
 	public static synchronized String generateHash() {
@@ -59,7 +59,7 @@ public class PasswordEncoder {
      *
      * @param password
      * @param saltKey
-     * @return
+     * @return String
      * @throws NoSuchAlgorithmException
      * @throws IOException
      * @author Ashish Shukla

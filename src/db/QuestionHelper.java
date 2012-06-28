@@ -24,9 +24,7 @@ public class QuestionHelper {
 			
 			String condition = "";
 			for(AnswerQuestion aq: answerquestions) {
-				// -> fix aq.getId() -> aq.getAnswerId()
-				// -> fix mysql db
-				condition += aq.getId() + ",";
+				condition += aq.getAnswerId() + ",";
 			}
 			condition = condition.replaceAll("[,]+$", "");
 			

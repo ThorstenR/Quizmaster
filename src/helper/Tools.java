@@ -64,7 +64,7 @@ public class Tools {
 	 * (Unused for now)
 	 * 
 	 * @param filename
-	 * @return
+	 * @return Object
 	 */
 	public static Object deserialize(String filename) {
 		try {
