@@ -18,6 +18,7 @@ import sun.misc.BASE64Encoder;
  * Helper class to create secure passwords
  * 
  * @author Ashish Shukla
+ * @author Thorsten Redetzky
  */
 public class PasswordEncoder {
     private static PasswordEncoder instance;
@@ -35,7 +36,6 @@ public class PasswordEncoder {
 
     /**
      * @return PasswordEncoder
-     * @author Ashish Shukla
      */
     public static synchronized PasswordEncoder getInstance() {
 		if (instance == null) {
@@ -51,10 +51,8 @@ public class PasswordEncoder {
 	 * Generates a hash (usually) used as the salt
 	 * 
 	 * @return String
-	 * @author Thorsten Redetzky
 	 */
 	public static synchronized String generateHash() {
-//		return Long.toHexString(Double.doubleToLongBits(Math.random()));
 		return java.util.UUID.randomUUID().toString();
 	}
 
@@ -66,7 +64,6 @@ public class PasswordEncoder {
      * @return String
      * @throws NoSuchAlgorithmException
      * @throws IOException
-     * @author Ashish Shukla
      */
     public synchronized String encode(String password, String saltKey) throws NoSuchAlgorithmException, IOException {
 		String encodedPassword = null;

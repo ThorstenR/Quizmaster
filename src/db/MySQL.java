@@ -40,14 +40,23 @@ public class MySQL {
 		}
 	}
 	
+	/**
+	 * Deletes an object from the database
+	 * 
+	 * @param o 
+	 */
 	public static synchronized void delete(Object o) {
 		session.delete(o);
 		session.flush();
 	}
 	
+	/**
+	 * Fixes the Auto-Increment value for a given table
+	 * 
+	 * @param table 
+	 */
 	public static synchronized void updateAutoIncrement(String table) {
 		Query query = session.createSQLQuery("ALTER TABLE " + table + " AUTO_INCREMENT = 1");
 		query.executeUpdate();
-//		query.list();
 	}
 }

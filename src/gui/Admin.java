@@ -94,6 +94,7 @@ public class Admin extends javax.swing.JFrame {
 	}//GEN-LAST:event_jButton1ActionPerformed
 
 	private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+		// wipe questions
 		try {
 			for(Question q: QuestionHelper.getAllQuestions()) {
 				MySQL.delete(q);
@@ -108,10 +109,13 @@ public class Admin extends javax.swing.JFrame {
 			
 		}
 		
+		// fix auto increment values
 		MySQL.updateAutoIncrement("question");
 		MySQL.updateAutoIncrement("answer");
 		MySQL.updateAutoIncrement("answer_question");
 		
+		
+		// import questions
 		ArrayList<Question> questions = (ArrayList<Question>) Tools.deserialize("C:\\_dump\\questions.txt");
 		for(Question q: questions) {
 			MySQL.getSession().save(q);
